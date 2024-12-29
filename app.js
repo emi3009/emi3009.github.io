@@ -21,9 +21,8 @@ async function ziegenProblem(playerChoiceInitial) {
     }
   });
 
-  await wait(1000);
-  
-  document.querySelectorAll('.door').forEach((doorElement, index) => {
+  setTimeout(function() {
+    document.querySelectorAll('.door').forEach((doorElement, index) => {
     const img = doorElement.querySelector('.door-img');
     if (index === openedDoor) {
       img.src = 'goat.png'; // Tür, die der Moderator geöffnet hat
@@ -32,6 +31,7 @@ async function ziegenProblem(playerChoiceInitial) {
 
   // Zeige die Buttons "Wechseln" oder "Bleiben"
   document.getElementById('switchSection').style.display = 'block';
+  }, 1000);  // 1000 Millisekunden = 1 Sekunde
 }
 
 // Funktion zum Bestimmen, welche Tür der Moderator öffnet
