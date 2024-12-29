@@ -56,7 +56,22 @@ function endGame() {
     }
   });
   
-  const result = playerChoice === carBehind ? "Du hast das Auto gefunden!" : "Leider eine Ziege hinter der Tür.";
+  const result;:
+  if(playerChoice === carBehind) {
+    result = "Du hast das Auto gefunden!";
+    document.querySelectorAll('.door').forEach((doorElement, index) => {
+      if (index === playerChoice) {
+        img.src = 'car.png'; 
+      }
+    });
+  } else {
+    result =  "Leider eine Ziege hinter der Tür.";
+    document.querySelectorAll('.door').forEach((doorElement, index) => {
+      if (index === playerChoice) {
+        img.src = 'goat.png'; 
+      }
+    });
+  }
   document.getElementById('result').innerText = `Du hast Tür ${playerChoice + 1} gewählt. ${result}`;
 
   // Speichern des Ergebnisses im localStorage
