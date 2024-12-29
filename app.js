@@ -47,6 +47,15 @@ function stayChoice() {
 
 // Ergebnis nach dem Spiel
 function endGame() {
+  document.querySelectorAll('.door').forEach((doorElement, index) => {
+    const img = doorElement.querySelector('.door-img');
+    if (index !== playerChoice) {
+       doorElement.classList.remove('selected');
+    } else {
+      doorElement.classList.add('selected');
+    }
+  });
+  
   const result = playerChoice === carBehind ? "Du hast das Auto gefunden!" : "Leider eine Ziege hinter der Tür.";
   document.getElementById('result').innerText = `Du hast Tür ${playerChoice + 1} gewählt. ${result}`;
 
