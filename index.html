@@ -12,17 +12,20 @@
     <h1>Das Ziegenproblem</h1>
     <p>Wähle eine der Türen aus, um das Experiment zu starten.</p>
 
-    <div class="buttons">
-      <button id="door1" class="button">Tür 1</button>
-      <button id="door2" class="button">Tür 2</button>
-      <button id="door3" class="button">Tür 3</button>
+    <div class="doors">
+      <div id="door1" class="door" data-door="0"><img src="door_closed.png" alt="Tür 1" class="door-img"></div>
+      <div id="door2" class="door" data-door="1"><img src="door_closed.png" alt="Tür 2" class="door-img"></div>
+      <div id="door3" class="door" data-door="2"><img src="door_closed.png" alt="Tür 3" class="door-img"></div>
     </div>
 
     <p id="result"></p>
     
-    <!-- Bereich für die Tür, die Monty öffnet -->
+    <!-- Bereich für die Tür, die Monty öffnet und eine Ziege zeigt -->
     <div id="montyOpenedDoor" style="display:none;">
-      <p>Monty hat Tür <span id="openedDoorNumber"></span> geöffnet und eine Ziege gefunden!</p>
+      <p>Monty hat eine Ziege hinter einer Tür gefunden!</p>
+      <div id="goatImage" class="goat-img" style="display:none;">
+        <img src="goat.png" alt="Ziege">
+      </div>
     </div>
 
     <!-- Optionen für den Spieler, ob er bleiben oder wechseln möchte -->
