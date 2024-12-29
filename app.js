@@ -4,7 +4,7 @@ let doors = [0, 1, 2]; // Die Türen 0, 1, 2 (Tür 1, Tür 2, Tür 3)
 let openedDoor; // Die geöffnete Tür des Moderators
 
 // Funktion zum Simulieren des Ziegenproblems
-function ziegenProblem(playerChoiceInitial) {
+async function ziegenProblem(playerChoiceInitial) {
   playerChoice = playerChoiceInitial; // Der Spieler wählt eine Tür
   carBehind = Math.floor(Math.random() * 3); // Zufällig das Auto hinter einer Tür platzieren
   openedDoor = getOpenDoor(); // Der Moderator öffnet eine Tür mit einer Ziege
@@ -21,11 +21,7 @@ function ziegenProblem(playerChoiceInitial) {
     }
   });
 
-  // Beispiel: Eine Sekunde warten
-setTimeout(function() {
-  console.log('1 Sekunde ist vergangen');
-}, 1000);  // 1000 Millisekunden = 1 Sekunde
-
+  await wait(1000);
   
   document.querySelectorAll('.door').forEach((doorElement, index) => {
     const img = doorElement.querySelector('.door-img');
