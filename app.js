@@ -9,8 +9,22 @@ function ziegenProblem(playerChoiceInitial) {
   carBehind = Math.floor(Math.random() * 3); // Zufällig das Auto hinter einer Tür platzieren
   openedDoor = getOpenDoor(); // Der Moderator öffnet eine Tür mit einer Ziege
 
-  // Zeige dem Spieler die Möglichkeit, die Tür zu wechseln
-  document.getElementById('result').innerText = `Du hast Tür ${playerChoice + 1} gewählt. Monty hat eine Ziege hinter einer anderen Tür gefunden. Möchtest du wechseln?`;
+  // Zeige dem Spieler, welche Tür er gewählt hat
+  document.getElementById('result').innerText = `Du hast Tür ${playerChoice + 1} gewählt.`;
+
+  // Türbilder aktualisieren
+  document.querySelectorAll('.door').forEach((doorElement, index) => {
+    const img = doorElement.querySelector('.door-img');
+    if (index === playerChoice) {
+      img.src = 'door_selected.png'; // Tür, die der Spieler gewählt hat
+    } else if (index === openedDoor) {
+      img.src = 'door_opened.png'; // Tür, die der Moderator geöffnet hat
+    }
+  });
+
+  // Zeige Montys geöffnete Tür mit der Ziege
+  document.getElementById('montyOpenedDoor').style.display = 'block';
+  document.getElementById('goatImage').style.display = 'block';
 
   // Zeige die Buttons "Wechseln" oder "Bleiben"
   document.getElementById('switchSection').style.display = 'block';
@@ -42,6 +56,8 @@ function endGame() {
   // Speichern des Ergebnisses im localStorage
   saveResult(playerChoice, carBehind);
   document.getElementById('switchSection').style.display = 'none';
+  document.getElementById('montyOpenedDoor').style.display = 'none';
+  document.getElementById('goatImage').style.display = 'none';
 }
 
 // Funktion zum Speichern der Ergebnisse im localStorage
