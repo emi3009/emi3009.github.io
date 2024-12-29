@@ -57,40 +57,20 @@ button:hover {
   transition: transform 0.3s ease; /* Smooth transition for scaling */
 }
 
+/* Highlight der ausgewählten Tür */
+.door.selected {
+  transform: scale(1.2); /* Vergrößert die gewählte Tür */
+  border-color: #FFD700; /* Goldfarbener Rand für hervorgehobene Tür */
+}
+
+/* Wenn die Tür gewechselt wird, wird sie genauso hervorgehoben */
+.door.finalChoice {
+  border-color: #FFD700; /* Goldfarbener Rand für die finale Tür */
+}
+
 .door-img {
   width: 80%;
   height: 80%;
-}
-
-/* Hover-Effekt für die Türen, bevor sie ausgewählt sind */
-.door.hovered {
-  transform: scale(1.1); /* Vergrößert die Tür bei einer "hovered"-Klasse */
-}
-
-/* Wenn die Tür ausgewählt ist, bleibt sie vergrößert */
-.door.selected {
-  transform: scale(1.2); /* Vergrößert die gewählte Tür noch mehr */
-}
-
-#montyOpenedDoor {
-  margin-top: 20px;
-  font-size: 1.1em;
-}
-
-.goat-img {
-  margin-top: 10px;
-  animation: goatAppear 1s ease-in-out forwards;
-}
-
-@keyframes goatAppear {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 #resultsSection {
