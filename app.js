@@ -52,8 +52,6 @@ function endGame() {
   // Speichern des Ergebnisses im localStorage
   saveResult(playerChoice, carBehind);
   document.getElementById('switchSection').style.display = 'none';
-  document.getElementById('montyOpenedDoor').style.display = 'none';
-  document.getElementById('goatImage').style.display = 'none';
 }
 
 // Funktion zum Speichern der Ergebnisse im localStorage
