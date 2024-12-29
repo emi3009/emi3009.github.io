@@ -20,8 +20,14 @@
 
     <p id="result"></p>
     
+    <!-- Bereich für die Tür, die Monty öffnet -->
+    <div id="montyOpenedDoor" style="display:none;">
+      <p>Monty hat Tür <span id="openedDoorNumber"></span> geöffnet und eine Ziege gefunden!</p>
+    </div>
+
+    <!-- Optionen für den Spieler, ob er bleiben oder wechseln möchte -->
     <div id="switchSection" style="display:none;">
-      <p>Monty hat eine Ziege hinter einer der anderen Türen gefunden!</p>
+      <p>Möchtest du wechseln?</p>
       <button id="switchButton" class="button">Wechseln</button>
       <button id="stayButton" class="button">Bleiben</button>
     </div>
