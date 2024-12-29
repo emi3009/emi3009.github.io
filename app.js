@@ -48,7 +48,6 @@ function stayChoice() {
 // Ergebnis nach dem Spiel
 function endGame() {
   document.querySelectorAll('.door').forEach((doorElement, index) => {
-    const img = doorElement.querySelector('.door-img');
     if (index !== playerChoice) {
        doorElement.classList.remove('selected');
     } else {
@@ -61,6 +60,7 @@ function endGame() {
     result = "Du hast das Auto gefunden!";
     document.querySelectorAll('.door').forEach((doorElement, index) => {
       if (index === playerChoice) {
+        const img = doorElement.querySelector('.door-img');
         img.src = 'car.png'; 
       }
     });
@@ -68,6 +68,7 @@ function endGame() {
     result =  "Leider eine Ziege hinter der Tür.";
     document.querySelectorAll('.door').forEach((doorElement, index) => {
       if (index === playerChoice) {
+        const img = doorElement.querySelector('.door-img');
         img.src = 'goat.png'; 
       }
     });
