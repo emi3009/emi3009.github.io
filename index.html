@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Das Ziegenproblem</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Das Ziegenproblem</h1>
+    <p>Wähle eine der Türen aus, um das Experiment zu starten.</p>
+
+    <div class="buttons">
+      <button id="door1" class="button">Tür 1</button>
+      <button id="door2" class="button">Tür 2</button>
+      <button id="door3" class="button">Tür 3</button>
+    </div>
+
+    <p id="result"></p>
+  </div>
+
+  <!-- Firebase SDK hinzufügen -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
