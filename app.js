@@ -16,13 +16,9 @@ function ziegenProblem(playerChoiceInitial) {
   document.querySelectorAll('.door').forEach((doorElement, index) => {
     const img = doorElement.querySelector('.door-img');
     if (index === playerChoice) {
-      img.src = 'door_opened.png'; // Tür, die der Spieler gewählt hat
-      doorElement.classList.add('selected'); // Vergrößere die gewählte Tür
+      //img.src = 'door_selected.png'; // Tür, die der Spieler gewählt hat
     } else if (index === openedDoor) {
       img.src = 'goat.png'; // Tür, die der Moderator geöffnet hat
-      doorElement.innerHTML += '<img src="goat.png" alt="Ziege" class="goat-img">'; // Zeige Ziege hinter der Tür
-    } else {
-      img.src = 'door_closed.png'; // Alle anderen Türen bleiben geschlossen
     }
   });
 
@@ -40,31 +36,12 @@ function getOpenDoor() {
 function switchChoice() {
   let remainingDoors = doors.filter(door => door !== playerChoice && door !== openedDoor);
   playerChoice = remainingDoors[0]; // Wechseln zu der verbleibenden Tür
-
-  // Markiere die finale Wahl
-  markFinalChoice(playerChoice);
-
   endGame();
 }
 
 // Wenn der Spieler bei seiner Wahl bleibt
 function stayChoice() {
-  // Markiere die finale Wahl
-  markFinalChoice(playerChoice);
-
   endGame();
-}
-
-// Funktion zum Markieren der finalen Wahl
-function markFinalChoice(finalChoice) {
-  // Alle Türen zurücksetzen
-  document.querySelectorAll('.door').forEach(door => {
-    door.classList.remove('selected', 'finalChoice'); // Entferne die Klassen
-  });
-
-  // Markiere die finale Tür
-  const finalDoor = document.querySelectorAll('.door')[finalChoice];
-  finalDoor.classList.add('finalChoice'); // Markiere die endgültige Wahl
 }
 
 // Ergebnis nach dem Spiel
@@ -75,6 +52,8 @@ function endGame() {
   // Speichern des Ergebnisses im localStorage
   saveResult(playerChoice, carBehind);
   document.getElementById('switchSection').style.display = 'none';
+  document.getElementById('montyOpenedDoor').style.display = 'none';
+  document.getElementById('goatImage').style.display = 'none';
 }
 
 // Funktion zum Speichern der Ergebnisse im localStorage
@@ -91,19 +70,20 @@ function showResults() {
   resultsList.innerHTML = '';
   results.forEach((result, index) => {
     const li = document.createElement('li');
-    li.textContent = `Experiment ${index + 1}: Du hast Tür ${result.playerChoice + 1} gewählt und das Auto war hinter Tür ${result.carBehind + 1}.`;
+    li.textContent = `Experiment ${index + 1}: Du hast Tür ${result.playerChoice + 1} gewählt, Auto war hinter Tür ${result.carBehind + 1}.`;
     resultsList.appendChild(li);
   });
+  document.getElementById('resultsSection').style.display = 'block';
 }
 
-// Funktion zur Initialisierung des Spiels
-function startGame() {
-  document.querySelectorAll('.door').forEach(door => {
-    door.classList.remove('hovered', 'selected', 'finalChoice'); // Setze alles zurück
-    door.innerHTML = '<img src="door_closed.png" alt="Geschlossene Tür" class="door-img">'; // Setze das Türbild zurück
-  });
+// Eventlistener für die Tür-Auswahl
+document.getElementById('door1').addEventListener('click', () => ziegenProblem(0));
+document.getElementById('door2').addEventListener('click', () => ziegenProblem(1));
+document.getElementById('door3').addEventListener('click', () => ziegenProblem(2));
 
-  document.getElementById('result').innerText = ''; // Setze die Ergebnisse zurück
-  document.getElementById('switchSection').style.display = 'none'; // Verstecke die Buttons
-  document.getElementById('resultsSection').style.display = 'none'; // Verstecke Ergebnisse
-}
+// Eventlistener für die Buttons "Wechseln" und "Bleiben"
+document.getElementById('switchButton').addEventListener('click', switchChoice);
+document.getElementById('stayButton').addEventListener('click', stayChoice);
+
+// Eventlistener für den Button "Ergebnisse anzeigen"
+document.getElementById('showResults').addEventListener('click', showResults);
