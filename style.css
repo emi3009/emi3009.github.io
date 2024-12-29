@@ -53,11 +53,23 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  transition: transform 0.3s ease; /* Smooth transition for scaling */
 }
 
 .door-img {
   width: 80%;
   height: 80%;
+}
+
+/* Hover-Effekt für die Türen, bevor sie ausgewählt sind */
+.door.hovered {
+  transform: scale(1.1); /* Vergrößert die Tür bei einer "hovered"-Klasse */
+}
+
+/* Wenn die Tür ausgewählt ist, bleibt sie vergrößert */
+.door.selected {
+  transform: scale(1.2); /* Vergrößert die gewählte Tür noch mehr */
 }
 
 #montyOpenedDoor {
