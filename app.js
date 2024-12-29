@@ -18,7 +18,18 @@ function ziegenProblem(playerChoiceInitial) {
     if (index === playerChoice) {
        doorElement.classList.add('selected');
       //img.src = 'door_selected.png'; // Tür, die der Spieler gewählt hat
-    } else if (index === openedDoor) {
+    }
+  });
+
+  // Beispiel: Eine Sekunde warten
+setTimeout(function() {
+  console.log('1 Sekunde ist vergangen');
+}, 1000);  // 1000 Millisekunden = 1 Sekunde
+
+  
+  document.querySelectorAll('.door').forEach((doorElement, index) => {
+    const img = doorElement.querySelector('.door-img');
+    if (index === openedDoor) {
       img.src = 'goat.png'; // Tür, die der Moderator geöffnet hat
     }
   });
