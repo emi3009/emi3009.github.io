@@ -61,7 +61,7 @@ function endGame() {
     document.querySelectorAll('.door').forEach((doorElement, index) => {
       if (index === playerChoice) {
         const img = doorElement.querySelector('.door-img');
-        img.src = 'car.png'; 
+        img.src = 'car.jpg'; 
       }
     });
   } else {
