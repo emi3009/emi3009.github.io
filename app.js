@@ -16,9 +16,10 @@ function ziegenProblem(playerChoiceInitial) {
   document.querySelectorAll('.door').forEach((doorElement, index) => {
     const img = doorElement.querySelector('.door-img');
     if (index === playerChoice) {
-      //img.src = 'door_selected.png'; // Tür, die der Spieler gewählt hat
+      doorElement.classList.add('selected'); // Vergrößere die gewählte Tür
     } else if (index === openedDoor) {
       img.src = 'goat.png'; // Tür, die der Moderator geöffnet hat
+      //doorElement.innerHTML += '<img src="goat.png" alt="Ziege" class="goat-img">'; // Zeige Ziege hinter der Tür
     }
   });
 
@@ -68,20 +69,36 @@ function showResults() {
   resultsList.innerHTML = '';
   results.forEach((result, index) => {
     const li = document.createElement('li');
-    li.textContent = `Experiment ${index + 1}: Du hast Tür ${result.playerChoice + 1} gewählt, Auto war hinter Tür ${result.carBehind + 1}.`;
+    li.textContent = `Experiment ${index + 1}: Du hast Tür ${result.playerChoice + 1} gewählt und das Auto war hinter Tür ${result.carBehind + 1}.`;
     resultsList.appendChild(li);
   });
-  document.getElementById('resultsSection').style.display = 'block';
 }
 
-// Eventlistener für die Tür-Auswahl
-document.getElementById('door1').addEventListener('click', () => ziegenProblem(0));
-document.getElementById('door2').addEventListener('click', () => ziegenProblem(1));
-document.getElementById('door3').addEventListener('click', () => ziegenProblem(2));
+// Hover-Effekt für Türen
+const doorsElements = document.querySelectorAll('.door');
+doorsElements.forEach((door) => {
+  door.addEventListener('mouseenter', () => {
+    if (!door.classList.contains('selected')) { // Vergrößert nur nicht ausgewählte Türen
+      door.classList.add('hovered');
+    }
+  });
 
-// Eventlistener für die Buttons "Wechseln" und "Bleiben"
-document.getElementById('switchButton').addEventListener('click', switchChoice);
-document.getElementById('stayButton').addEventListener('click', stayChoice);
+  door.addEventListener('mouseleave', () => {
+    if (!door.classList.contains('selected')) { // Verkleinert nur nicht ausgewählte Türen
+      door.classList.remove('hovered');
+    }
+  });
+});
 
-// Eventlistener für den Button "Ergebnisse anzeigen"
-document.getElementById('showResults').addEventListener('click', showResults);
+// Funktion zur Initialisierung des Spiels
+function startGame() {
+  document.querySelectorAll('.door').forEach(door => {
+    door.classList.remove('hovered', 'selected'); // Setze alles zurück
+    door.innerHTML = '<img src="door_closed.png" alt="Geschlossene Tür" class="door-img">'; // Setze das Türbild zurück
+  });
+
+  document.getElementById('result').innerText = ''; // Setze die Ergebnisse zurück
+  document.getElementById('montyOpenedDoor').style.display = 'none'; // Verstecke die Monty-Tür
+  document.getElementById('switchSection').style.display = 'none'; // Verstecke die Buttons
+  document.getElementById('resultsSection').style.display = 'none'; // Verstecke Ergebnisse
+}
