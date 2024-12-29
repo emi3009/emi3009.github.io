@@ -56,7 +56,7 @@ function endGame() {
     }
   });
   
-  const result;:
+  const result;
   if(playerChoice === carBehind) {
     result = "Du hast das Auto gefunden!";
     document.querySelectorAll('.door').forEach((doorElement, index) => {
