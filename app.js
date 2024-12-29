@@ -16,15 +16,11 @@ function ziegenProblem(playerChoiceInitial) {
   document.querySelectorAll('.door').forEach((doorElement, index) => {
     const img = doorElement.querySelector('.door-img');
     if (index === playerChoice) {
-      img.src = 'door_selected.png'; // Tür, die der Spieler gewählt hat
+      //img.src = 'door_selected.png'; // Tür, die der Spieler gewählt hat
     } else if (index === openedDoor) {
-      img.src = 'door_opened.png'; // Tür, die der Moderator geöffnet hat
+      img.src = 'goat.png'; // Tür, die der Moderator geöffnet hat
     }
   });
-
-  // Zeige Montys geöffnete Tür mit der Ziege
-  document.getElementById('montyOpenedDoor').style.display = 'block';
-  document.getElementById('goatImage').style.display = 'block';
 
   // Zeige die Buttons "Wechseln" oder "Bleiben"
   document.getElementById('switchSection').style.display = 'block';
