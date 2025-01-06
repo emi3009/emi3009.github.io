@@ -54,16 +54,16 @@ function getOpenDoor() {
 function switchChoice() {
   let remainingDoors = doors.filter(door => door !== playerChoice && door !== openedDoor);
   playerChoice = remainingDoors[0]; // Wechseln zu der verbleibenden Tür
-  endGame();
+  endGame(true);
 }
 
 // Wenn der Spieler bei seiner Wahl bleibt
 function stayChoice() {
-  endGame();
+  endGame(false);
 }
 
 // Ergebnis nach dem Spiel
-function endGame() {
+function endGame(didSwitch) {
   document.querySelectorAll('.door').forEach((doorElement, index) => {
     if (index !== playerChoice) {
        doorElement.classList.remove('selected');
@@ -93,14 +93,14 @@ function endGame() {
   document.getElementById('result').innerText = `Du hast Tür ${playerChoice + 1} gewählt. ${result}`;
 
   // Speichern des Ergebnisses im localStorage
-  saveResult(playerChoice, carBehind);
+  saveResult(playerChoice, carBehind, didSwitch);
   document.getElementById('switchSection').style.display = 'none';
   document.getElementById('montyOpenedDoor').style.display = 'none';
   document.getElementById('goatImage').style.display = 'none';
 }
 
 // Funktion zum Speichern der Ergebnisse im localStorage
-function saveResult(playerChoice, car) {
+function saveResult(playerChoice, car, didSwitch) {
   const resultsCollection = collection(db, 'ziegen_problem');
 
   // Store the result
