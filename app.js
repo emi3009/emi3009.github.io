@@ -99,7 +99,7 @@ function endGame() {
 
 // Funktion zum Speichern der Ergebnisse im localStorage
 function saveResult(playerChoice, car) {
-  const resultsCollection = db.collection('ziegen_problem');
+  const resultsCollection = collection(db, 'ziegen_problem');
 
   // Store the result
   resultsCollection.add({
