@@ -94,9 +94,21 @@ function endGame() {
 
 // Funktion zum Speichern der Ergebnisse im localStorage
 function saveResult(playerChoice, car) {
-  let results = JSON.parse(localStorage.getItem("results")) || [];
-  results.push({ playerChoice, carBehind: car, timestamp: new Date() });
-  localStorage.setItem("results", JSON.stringify(results));
+  const resultsCollection = db.collection('ziegen_problem');
+
+  // Store the result
+  resultsCollection.add({
+    playerChoice,
+    carBehind,
+    didSwitch,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp() // Save the timestamp automatically
+  })
+  .then(() => {
+    console.log("Result saved successfully!");
+  })
+  .catch((error) => {
+    console.error("Error saving result: ", error);
+  });
 }
 
 // Functions for door EventListeners
@@ -112,6 +124,21 @@ document.getElementById('door3').addEventListener('click', door3Handler);
 // Eventlistener für die Buttons "Wechseln" und "Bleiben"
 document.getElementById('switchButton').addEventListener('click', switchChoice);
 document.getElementById('stayButton').addEventListener('click', stayChoice);
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCNrsG76-QobHmbMMGkIc6HMcyx4YPGe3A",
+    authDomain: "ziegenproblem.firebaseapp.com",
+    projectId: "ziegenproblem",
+    storageBucket: "ziegenproblem.firebasestorage.app",
+    messagingSenderId: "646164011377",
+    appId: "1:646164011377:web:1a1eefe3a5ba66cbc17ed0",
+    measurementId: "G-KC7HS5JFMT"
+  };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = firebase.firestore();
 
 function resetGame() {
   gameStarted = false; // Erlaubt wieder das Klicken auf Türen
