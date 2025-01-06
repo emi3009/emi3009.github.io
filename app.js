@@ -137,3 +137,14 @@ document.getElementById('door3').addEventListener('click', () => ziegenProblem(2
 // Eventlistener für die Buttons "Wechseln" und "Bleiben"
 document.getElementById('switchButton').addEventListener('click', switchChoice);
 document.getElementById('stayButton').addEventListener('click', stayChoice);
+
+function resetGame() {
+  gameStarted = false; // Erlaubt wieder das Klicken auf Türen
+  document.getElementById('switchSection').style.display = 'none';
+  document.querySelectorAll('.door').forEach((doorElement, index) => {
+    const img = doorElement.querySelector('.door-img');
+    img.src = 'door_closed.png'; // Zurücksetzen des Türbildes
+    doorElement.classList.remove('selected');
+  });
+  document.getElementById('result').innerText = ''; // Zurücksetzen des Ergebnisses
+}
