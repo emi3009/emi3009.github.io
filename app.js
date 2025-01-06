@@ -99,19 +99,15 @@ function saveResult(playerChoice, car) {
   localStorage.setItem("results", JSON.stringify(results));
 }
 
-// Add Event Listeners to Doors
-const door1Handler = () => doorClickHandler(0);
-const door2Handler = () => doorClickHandler(1);
-const door3Handler = () => doorClickHandler(2);
+// Functions for door EventListeners
+const door1Handler = () => ziegenProblem(0);
+const door2Handler = () => ziegenProblem(1);
+const door3Handler = () => ziegenProblem(2);
 
+// Eventlistener für die Tür-Auswahl
 document.getElementById('door1').addEventListener('click', door1Handler);
 document.getElementById('door2').addEventListener('click', door2Handler);
 document.getElementById('door3').addEventListener('click', door3Handler);
-
-// Eventlistener für die Tür-Auswahl
-document.getElementById('door1').addEventListener('click', () => ziegenProblem(0));
-document.getElementById('door2').addEventListener('click', () => ziegenProblem(1));
-document.getElementById('door3').addEventListener('click', () => ziegenProblem(2));
 
 // Eventlistener für die Buttons "Wechseln" und "Bleiben"
 document.getElementById('switchButton').addEventListener('click', switchChoice);
