@@ -2,6 +2,39 @@ let playerChoice;
 let carBehind;
 let doors = [0, 1, 2]; // Die Türen 0, 1, 2 (Tür 1, Tür 2, Tür 3)
 let openedDoor; // Die geöffnete Tür des Moderators
+let gameStarted = false; // Spielstatus: Wurde eine Tür bereits ausgewählt?
+
+async function ziegenProblem(playerChoiceInitial) {
+  if (gameStarted) return; // Verhindert mehrfaches Klicken auf Türen
+
+  gameStarted = true; // Spielstatus auf "gestartet" setzen
+  playerChoice = playerChoiceInitial; // Der Spieler wählt eine Tür
+  carBehind = Math.floor(Math.random() * 3); // Zufällig das Auto hinter einer Tür platzieren
+  openedDoor = getOpenDoor(); // Der Moderator öffnet eine Tür mit einer Ziege
+
+  // Zeige dem Spieler, welche Tür er gewählt hat
+  document.getElementById('result').innerText = `Du hast Tür ${playerChoice + 1} gewählt.`;
+
+  // Türbilder aktualisieren
+  document.querySelectorAll('.door').forEach((doorElement, index) => {
+    const img = doorElement.querySelector('.door-img');
+    if (index === playerChoice) {
+      doorElement.classList.add('selected');
+    }
+  });
+
+  setTimeout(function() {
+    document.querySelectorAll('.door').forEach((doorElement, index) => {
+      const img = doorElement.querySelector('.door-img');
+      if (index === openedDoor) {
+        img.src = 'goat.png'; // Tür, die der Moderator geöffnet hat
+      }
+    });
+
+    // Zeige die Buttons "Wechseln" oder "Bleiben"
+    document.getElementById('switchSection').style.display = 'block';
+  }, 1000);  // 1000 Millisekunden = 1 Sekunde
+}
 
 // Funktion zum Simulieren des Ziegenproblems
 async function ziegenProblem(playerChoiceInitial) {
