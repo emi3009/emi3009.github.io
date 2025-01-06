@@ -104,11 +104,11 @@ function saveResult(playerChoice, car, didSwitch) {
   const resultsCollection = collection(db, 'ziegen_problem');
 
   // Store the result
-  resultsCollection.add({
+  addDoc(resultsCollection, {
     playerChoice,
     carBehind,
     didSwitch,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp() // Save the timestamp automatically
+    timestamp: serverTimestamp() // Automatically add timestamp when saving data
   })
   .then(() => {
     console.log("Result saved successfully!");
