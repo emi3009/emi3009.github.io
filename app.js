@@ -10,6 +10,8 @@ async function ziegenProblem(playerChoiceInitial) {
   carBehind = Math.floor(Math.random() * 3); // Zufällig das Auto hinter einer Tür platzieren
   openedDoor = getOpenDoor(); // Der Moderator öffnet eine Tür mit einer Ziege
 
+  disableDoorClicks();
+  
   // Zeige dem Spieler, welche Tür er gewählt hat
   document.getElementById('result').innerText = `Du hast Tür ${playerChoice + 1} gewählt.`;
 
@@ -115,4 +117,11 @@ function resetGame() {
     doorElement.classList.remove('selected');
   });
   document.getElementById('result').innerText = ''; // Zurücksetzen des Ergebnisses
+}
+
+// Disable Event Listeners on Doors
+function disableDoorClicks() {
+  document.getElementById('door1').removeEventListener('click', door1Handler);
+  document.getElementById('door2').removeEventListener('click', door2Handler);
+  document.getElementById('door3').removeEventListener('click', door3Handler);
 }
