@@ -96,19 +96,6 @@ function saveResult(playerChoice, car) {
   localStorage.setItem("results", JSON.stringify(results));
 }
 
-// Ergebnisse anzeigen
-function showResults() {
-  const results = JSON.parse(localStorage.getItem("results")) || [];
-  const resultsList = document.getElementById('resultsList');
-  resultsList.innerHTML = '';
-  results.forEach((result, index) => {
-    const li = document.createElement('li');
-    li.textContent = `Experiment ${index + 1}: Du hast Tür ${result.playerChoice + 1} gewählt, Auto war hinter Tür ${result.carBehind + 1}.`;
-    resultsList.appendChild(li);
-  });
-  document.getElementById('resultsSection').style.display = 'block';
-}
-
 // Eventlistener für die Tür-Auswahl
 document.getElementById('door1').addEventListener('click', () => ziegenProblem(0));
 document.getElementById('door2').addEventListener('click', () => ziegenProblem(1));
@@ -117,6 +104,3 @@ document.getElementById('door3').addEventListener('click', () => ziegenProblem(2
 // Eventlistener für die Buttons "Wechseln" und "Bleiben"
 document.getElementById('switchButton').addEventListener('click', switchChoice);
 document.getElementById('stayButton').addEventListener('click', stayChoice);
-
-// Eventlistener für den Button "Ergebnisse anzeigen"
-document.getElementById('showResults').addEventListener('click', showResults);
