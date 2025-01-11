@@ -52,7 +52,7 @@ async function ziegenProblem(playerChoiceInitial) {
       }
     });
 
-    document.getElementById('.probabilitySection').style.display = 'block';
+    document.getElementById('probabilitySection').style.display = 'block';
   }, 1000);
 }
 
