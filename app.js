@@ -52,8 +52,19 @@ async function ziegenProblem(playerChoiceInitial) {
       }
     });
 
-    document.getElementById('probabilitySection').style.display = 'block';
-  }, 1000);
+    document.getElementById('probabilitySectionSwitch').style.display = 'block';
+  }, 400);
+}
+
+function submitSwitchEstimation() {
+  // store result
+  document.getElementById('probabilitySectionSwitch').style.display = 'none';
+  document.getElementById('probabilitySectionStay').style.display = 'block';
+}
+
+function submitStayEstimation() {
+  // store result
+  document.getElementById('probabilitySectionStay').style.display = 'none';
 }
 
 function getOpenDoor() {
