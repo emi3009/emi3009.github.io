@@ -100,9 +100,71 @@ function endGame(didSwitch) {
   }
 
   document.getElementById('result').innerText = `Du hast Tür ${playerChoice + 1} gewählt. ${result}`;
-
   saveResult(playerChoice, carBehind, didSwitch);
-  document.getElementById('switchSection').style.display = 'none';
+
+  // Türen verschwinden lassen
+  setTimeout(() => {
+    document.querySelector('.doors').style.display = 'none';
+    askProbability(didSwitch);
+  }, 2000);
+}
+
+// Frage zur Wahrscheinlichkeit anzeigen
+function askProbability(didSwitch) {
+  const probabilitySection = document.getElementById('probabilitySection');
+  const feedback = document.getElementById('probabilityFeedback');
+
+  if (didSwitch) {
+    document.getElementById('probabilityInput').placeholder = 'Wie hoch ist die Wahrscheinlichkeit beim Wechseln?';
+  } else {
+    document.getElementById('probabilityInput').placeholder = 'Wie hoch ist die Wahrscheinlichkeit beim Bleiben?';
+  }
+
+  probabilitySection.style.display = 'block';
+
+  document.getElementById('submitProbability').onclick = async () => {
+    const probabilityInput = document.getElementById('probabilityInput').value.trim();
+    const fractionRegex = /^(\d+)\/(\d+)$/; // Format: Zähler/Nenner
+    const match = probabilityInput.match(fractionRegex);
+
+    if (!match) {
+      feedback.innerText = "Bitte gib die Wahrscheinlichkeit in einem gültigen Bruchformat ein (z. B. 1/3 oder 2/3).";
+      feedback.style.color = "red";
+      return;
+    }
+
+    const numerator = parseInt(match[1], 10);
+    const denominator = parseInt(match[2], 10);
+
+    if (denominator === 0) {
+      feedback.innerText = "Der Nenner darf nicht 0 sein.";
+      feedback.style.color = "red";
+      return;
+    }
+
+    const probability = numerator / denominator;
+
+    if (probability < 0 || probability > 1) {
+      feedback.innerText = "Die Wahrscheinlichkeit muss zwischen 0 und 1 liegen.";
+      feedback.style.color = "red";
+      return;
+    }
+
+    feedback.innerText = `Danke! Deine geschätzte Wahrscheinlichkeit von ${probabilityInput} (${probability.toFixed(2)}) wurde gespeichert.`;
+    feedback.style.color = "green";
+
+    // Wahrscheinlichkeit speichern
+    const probabilityCollection = collection(db, 'probability_input');
+    await addDoc(probabilityCollection, {
+      didSwitch,
+      probabilityFraction: probabilityInput,
+      probabilityDecimal: probability,
+      timestamp: serverTimestamp()
+    });
+
+    console.log("Wahrscheinlichkeit erfolgreich gespeichert!");
+    probabilitySection.style.display = 'none';
+  };
 }
 
 // Ergebnis in Firestore speichern
@@ -123,29 +185,6 @@ function saveResult(playerChoice, car, didSwitch) {
     });
 }
 
-// Wahrscheinlichkeitseingabe speichern
-document.getElementById('submitProbability').addEventListener('click', () => {
-  const probability = parseFloat(document.getElementById('probabilityInput').value);
-
-  if (isNaN(probability) || probability < 0 || probability > 100) {
-    document.getElementById('probabilityFeedback').innerText = 'Bitte eine gültige Wahrscheinlichkeit zwischen 0 und 100 eingeben.';
-    return;
-  }
-
-  const probabilityCollection = collection(db, 'probability_input');
-  addDoc(probabilityCollection, {
-    probability,
-    timestamp: serverTimestamp()
-  })
-    .then(() => {
-      document.getElementById('probabilityFeedback').innerText = 'Deine Eingabe wurde gespeichert. Danke!';
-      console.log("Probability saved successfully!");
-    })
-    .catch((error) => {
-      console.error("Error saving probability: ", error);
-    });
-});
-
 // Eventlistener für Türen
 document.getElementById('door1').addEventListener('click', () => ziegenProblem(0));
 document.getElementById('door2').addEventListener('click', () => ziegenProblem(1));
@@ -160,3 +199,4 @@ function disableDoorClicks() {
   document.getElementById('door2').replaceWith(document.getElementById('door2').cloneNode(true));
   document.getElementById('door3').replaceWith(document.getElementById('door3').cloneNode(true));
 }
+
