@@ -24,15 +24,15 @@
     <!-- Wahrscheinlichkeitseingabe -->
     <div id="probabilitySectionSwitch" style="display:none;">
       <label for="probabilityInput">Was denkst du, wie hoch ist die Wahrscheinlichkeit, das Auto zu finden wenn du wechselst? (1 - 100)</label>
-      <input type="number" id="probabilityInput" placeholder="Wahrscheinlichkeit">
-      <button id="submitProbability" class="button" onclick="myFunction()">Absenden</button>
+      <input type="number" id="probabilityInputSwitch" placeholder="Wahrscheinlichkeit">
+      <button id="submitProbabilitySwitch" class="button" onclick="submitSwitchEstimation()">Absenden</button>
     </div>
 
     <!-- Wahrscheinlichkeitseingabe -->
     <div id="probabilitySectionStay" style="display:none;">
       <label for="probabilityInput">Was denkst du, wie hoch ist die Wahrscheinlichkeit, das Auto zu finden wenn du bleibst? (1 - 100)</label>
       <input type="number" id="probabilityInput" placeholder="Wahrscheinlichkeit">
-      <button id="submitProbability" class="button">Absenden</button>
+      <button id="submitProbability" class="button" onclick="submitStayEstimation()">Absenden</button>
     </div>
 
     <!-- Optionen für den Spieler, ob er bleiben oder wechseln möchte -->
