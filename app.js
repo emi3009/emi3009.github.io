@@ -78,12 +78,14 @@ function switchChoice() {
   let remainingDoors = doors.filter(door => door !== playerChoice && door !== openedDoor);
   playerChoice = remainingDoors[0];
   document.getElementById('probabilitySectionSwitch').style.display = 'block';
+  document.getElementById('switchSection').style.display = 'none';
   didSwitch = true;
 }
 
 function stayChoice() {
   didSwitch = false;
   document.getElementById('probabilitySectionSwitch').style.display = 'block';
+  document.getElementById('switchSection').style.display = 'none';
 }
 
 function endGame() {
