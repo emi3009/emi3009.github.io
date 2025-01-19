@@ -65,6 +65,7 @@ function submitSwitchEstimation() {
 function submitStayEstimation() {
   // store result
   document.getElementById('probabilitySectionStay').style.display = 'none';
+  document.getElementById('switchSection').style.display = 'block';
 }
 
 function getOpenDoor() {
