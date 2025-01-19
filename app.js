@@ -142,6 +142,10 @@ document.getElementById('door1').addEventListener('click', () => ziegenProblem(0
 document.getElementById('door2').addEventListener('click', () => ziegenProblem(1));
 document.getElementById('door3').addEventListener('click', () => ziegenProblem(2));
 
+// Switch or Stay estimations buttons
+document.getElementById('submitProbabilitySwitch').addEventListener('click', submitSwitchEstimation);
+document.getElementById('submitProbabilityStay').addEventListener('click', submitStayEstimation);
+
 // Eventlistener für Buttons
 document.getElementById('switchButton').addEventListener('click', switchChoice);
 document.getElementById('stayButton').addEventListener('click', stayChoice);
