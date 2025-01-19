@@ -7,6 +7,7 @@ let carBehind;
 let doors = [0, 1, 2];
 let openedDoor;
 let gameStarted = false;
+let didSwitch;
 
 // Firebase-Konfiguration
 const firebaseConfig = {
@@ -52,7 +53,7 @@ async function ziegenProblem(playerChoiceInitial) {
       }
     });
 
-    document.getElementById('probabilitySectionSwitch').style.display = 'block';
+    document.getElementById('switchSection').style.display = 'block';
   }, 400);
 }
 
@@ -65,7 +66,7 @@ function submitSwitchEstimation() {
 function submitStayEstimation() {
   // store result
   document.getElementById('probabilitySectionStay').style.display = 'none';
-  document.getElementById('switchSection').style.display = 'block';
+  endGame();
 }
 
 function getOpenDoor() {
@@ -76,14 +77,16 @@ function getOpenDoor() {
 function switchChoice() {
   let remainingDoors = doors.filter(door => door !== playerChoice && door !== openedDoor);
   playerChoice = remainingDoors[0];
-  endGame(true);
+  document.getElementById('probabilitySectionSwitch').style.display = 'block';
+  didSwitch = true;
 }
 
 function stayChoice() {
-  endGame(false);
+  didSwitch = false;
+  document.getElementById('probabilitySectionSwitch').style.display = 'block';
 }
 
-function endGame(didSwitch) {
+function endGame() {
   document.querySelectorAll('.door').forEach((doorElement, index) => {
     if (index !== playerChoice) {
       doorElement.classList.remove('selected');
