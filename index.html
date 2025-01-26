@@ -1,49 +1,13 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Das Ziegenproblem</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Data Visualization</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+<h1>Data Visualization</h1>
 
-  <div class="container">
-    <h1>Das Ziegenproblem</h1>
-    <p>Wähle eine der Türen aus, um das Experiment zu starten.</p>
-
-    <!-- Türenbereich -->
-    <div class="doors">
-      <div id="door1" class="door" data-door="0"><img src="door_closed.png" alt="Tür 1" class="door-img"></div>
-      <div id="door2" class="door" data-door="1"><img src="door_closed.png" alt="Tür 2" class="door-img"></div>
-      <div id="door3" class="door" data-door="2"><img src="door_closed.png" alt="Tür 3" class="door-img"></div>
-    </div>
-
-    <p id="result"></p>
-
-    <!-- Wahrscheinlichkeitseingabe -->
-    <div id="probabilitySectionSwitch" style="display:none;">
-      <label for="probabilitySwitchInput">Was denkst du, wie hoch ist die Wahrscheinlichkeit, das Auto zu finden wenn du wechselst? (1 - 100)</label>
-      <input type="number" id="probabilitySwitchInput" placeholder="Wahrscheinlichkeit">
-      <button id="submitProbabilitySwitch" class="button">Absenden</button>
-    </div>
-
-    <!-- Wahrscheinlichkeitseingabe -->
-    <div id="probabilitySectionStay" style="display:none;">
-      <label for="probabilityStayInput">Was denkst du, wie hoch ist die Wahrscheinlichkeit, das Auto zu finden wenn du bleibst? (1 - 100)</label>
-      <input type="number" id="probabilityStayInput" placeholder="Wahrscheinlichkeit">
-      <button id="submitProbabilityStay" class="button">Absenden</button>
-    </div>
-
-    <!-- Optionen für den Spieler, ob er bleiben oder wechseln möchte -->
-    <div id="switchSection" style="display:none;">
-      <button id="switchButton" class="button">Wechseln</button>
-      <button id="stayButton" class="button">Bleiben</button>
-    </div>
-
-  </div>
-  <script type="module" src="app.js"></script>
+<canvas id="myChart1"></canvas>
+<canvas id="myChart2"></canvas>
 </body>
 </html>
-
-
