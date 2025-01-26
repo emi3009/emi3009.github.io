@@ -8,7 +8,6 @@ let doors = [0, 1, 2];
 let openedDoor;
 let gameStarted = false;
 let didSwitch;
-let didStay;
 let probabilityStay;
 let probabilitySwitch;
 
@@ -134,7 +133,6 @@ function saveResult(playerChoice, car, didSwitch) {
     playerChoice,
     carBehind,
     didSwitch,
-    didStay,
     probabilitySwitch,
     probabilityStay,
     timestamp: Date.now()
