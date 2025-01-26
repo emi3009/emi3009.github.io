@@ -42,24 +42,14 @@ onValue(resultRef, (snapshot) => {
   new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: labels,
+      labels: ['Q1', 'Q2', 'Q3', 'Q4'],
       datasets: [{
-        label: 'Probabilities',
-        data: values,
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
-        borderWidth: 1,
+        label: 'Users',
+        data: [50, 60, 70, 180]
+      }, {
+        label: 'Revenue',
+        data: [100, 200, 300, 400]
       }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Ziegen Problem Probabilities'
-        }
-      }
     }
   });
 }, (error) => {
