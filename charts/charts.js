@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -21,7 +21,7 @@ const database = getDatabase(app);
 const resultRef = ref(database, 'ziegen_problem');
 
 // Retrieve data from the database
-resultRef.on('value', (snapshot) => {
+onValue(resultRef, (snapshot) => {
   const data = snapshot.val();
   console.log(data);
 
