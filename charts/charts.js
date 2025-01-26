@@ -30,7 +30,10 @@ onValue(resultRef, (snapshot) => {
   const values = Object.values(data).map(({ probabilityStay, probabilitySwitch }) => ({
     probabilityStay,
     probabilitySwitch,
-  }));
+  })).map(({ probabilityStay, probabilitySwitch }) => [
+    probabilityStay,
+    probabilitySwitch,
+  ]);
   // Get the canvas element
   const canvas = document.getElementById('myChart1');
   const ctx = canvas.getContext('2d');
