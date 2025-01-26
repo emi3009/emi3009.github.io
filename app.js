@@ -69,7 +69,7 @@ function submitSwitchEstimation() {
 
 function submitStayEstimation() {
   // store result
-  probabilityStay = Number(document.getElementById('probabilityStay').value);
+  probabilitySwitch = Number(document.getElementById('probabilityStayInput').value);
   document.getElementById('probabilitySectionStay').style.display = 'none';
   endGame();
 }
