@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js/auto';
 
 // Firebase configuration
 const firebaseConfig = {
@@ -25,16 +26,43 @@ onValue(resultRef, (snapshot) => {
   const data = snapshot.val();
   console.log(data);
 
-  // Process the retrieved data and display it on your website
-  // For example, you can loop through the data and create HTML elements
-  for (const key in data) {
-    if (data.hasOwnProperty(key)) {
-      const element = data[key];
-      console.log(element);
-      // Create HTML elements and append them to your website
+  // Prepare the data for the pie chart
+  const labels = Object.keys(data);
+  const values = Object.values(data).map(Number);
+
+  // Get the canvas element
+  const canvas = document.getElementById('myChart1');
+  const ctx = canvas.getContext('2d');
+
+  // Create the pie chart
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Probabilities',
+        data: values,
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Ziegen Problem Probabilities'
+        }
+      }
     }
-  }
+  });
 }, (error) => {
-  console.error('Error retrieving data from Firebase:', error);
+  console.error(error);
 });
 
