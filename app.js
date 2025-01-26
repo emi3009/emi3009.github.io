@@ -8,6 +8,7 @@ let doors = [0, 1, 2];
 let openedDoor;
 let gameStarted = false;
 let didSwitch;
+let didStay;
 let probabilityStay;
 let probabilitySwitch;
 
