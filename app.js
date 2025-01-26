@@ -134,6 +134,7 @@ function saveResult(playerChoice, car, didSwitch) {
     playerChoice,
     carBehind,
     didSwitch,
+    didStay,
     probabilitySwitch,
     probabilityStay,
     timestamp: Date.now()
