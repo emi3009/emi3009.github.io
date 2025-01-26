@@ -81,8 +81,12 @@ onValue(resultRef, (snapshot) => {
     console.log(data);
 
     // Count the number of stayed and switched
-    const won = Object.values(data).filter(item => item.didSwitch).filter(item.carBehind === item.playerChoice).length;
-    const lost = Object.values(data).filter(item => item.didSwitch).filter(item.carBehind !== item.playerChoice).length;
+    const won = Object.values(data)
+        .filter(item => item.didSwitch)
+        .filter(item => item.carBehind === item.playerChoice).length;
+    const lost = Object.values(data)
+        .filter(item => item.didSwitch)
+        .filter(item => item.carBehind !== item.playerChoice).length;
 
     // Chart configuration
     const chartData = {
