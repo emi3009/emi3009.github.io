@@ -26,9 +26,11 @@ onValue(resultRef, (snapshot) => {
   console.log(data);
 
   // Prepare the data for the pie chart
-  const labels = Object.keys(data);
-  const values = Object.values(data).map(Number);
-
+  const labels = ['Probability Stay', 'Probability Switch']
+  const values = Object.values(data).map(({ probabilityStay, probabilitySwitch }) => ({
+    probabilityStay,
+    probabilitySwitch,
+  }));
   // Get the canvas element
   const canvas = document.getElementById('myChart1');
   const ctx = canvas.getContext('2d');
@@ -41,13 +43,9 @@ onValue(resultRef, (snapshot) => {
       datasets: [{
         label: 'Probabilities',
         data: values,
-        backgroundColor: [
-          '#FF6384',
-          '#36A2EB',
-          '#FFCE56',
-          '#4BC0C0',
-          '#9966FF'
-        ]
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+        borderWidth: 1,
       }]
     },
     options: {
