@@ -8,6 +8,8 @@ let doors = [0, 1, 2];
 let openedDoor;
 let gameStarted = false;
 let didSwitch;
+let probabilityStay;
+let probabilitySwitch;
 
 // Firebase configuration
 const firebaseConfig = {
@@ -60,12 +62,14 @@ async function ziegenProblem(playerChoiceInitial) {
 
 function submitSwitchEstimation() {
   // store result
+  probabilitySwitch = Number(document.getElementById('probabilitySwitchInput').value);
   document.getElementById('probabilitySectionSwitch').style.display = 'none';
   document.getElementById('probabilitySectionStay').style.display = 'block';
 }
 
 function submitStayEstimation() {
   // store result
+  probabilityStay = Number(document.getElementById('probabilityStay').value);
   document.getElementById('probabilitySectionStay').style.display = 'none';
   endGame();
 }
@@ -129,6 +133,8 @@ function saveResult(playerChoice, car, didSwitch) {
     playerChoice,
     carBehind,
     didSwitch,
+    probabilitySwitch,
+    probabilityStay,
     timestamp: Date.now()
   })
     .then(() => {
