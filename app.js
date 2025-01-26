@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 
 let playerChoice;
@@ -125,7 +125,7 @@ function endGame() {
 function saveResult(playerChoice, car, didSwitch) {
   const resultRef = ref(database, 'ziegen_problem');
 
-  set(resultRef, {
+  push(resultRef, {
     playerChoice,
     carBehind,
     didSwitch,
