@@ -26,8 +26,8 @@ onValue(resultRef, (snapshot) => {
   console.log(data);
 
   // Count the number of stayed and switched
-  const stayed = data.filter(item => !item.didSwitch).length;
-  const switched = data.filter(item => item.didSwitch).length;
+  const stayed = Object.values(data).filter(item => !item.didSwitch).length;
+  const switched = Object.values(data).filter(item => item.didSwitch).length;
   // Get the canvas element
   const canvas = document.getElementById('myChart1');
   const ctx = canvas.getContext('2d');
