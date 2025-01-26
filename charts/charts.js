@@ -126,7 +126,7 @@ onValue(resultRef, (snapshot) => {
 let stayedProbabilityChart;
 // Get the canvas element
 const canvas3 = document.getElementById('myChart3');
-const ctx3 = canvas3.getContext('3d');
+const ctx3 = canvas3.getContext('2d');
 let myChart3;
 // Retrieve data from the database
 onValue(resultRef, (snapshot) => {
