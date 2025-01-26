@@ -25,15 +25,9 @@ onValue(resultRef, (snapshot) => {
   const data = snapshot.val();
   console.log(data);
 
-  // Prepare the data for the pie chart
-  const labels = ['Probability Stay', 'Probability Switch']
-  const values = Object.values(data).map(({ probabilityStay, probabilitySwitch }) => ({
-    probabilityStay,
-    probabilitySwitch,
-  })).map(({ probabilityStay, probabilitySwitch }) => [
-    probabilityStay,
-    probabilitySwitch,
-  ]);
+  // Count the number of stayed and switched
+  const stayed = data.filter(item => !item.didSwitch).length;
+  const switched = data.filter(item => item.didSwitch).length;
   // Get the canvas element
   const canvas = document.getElementById('myChart1');
   const ctx = canvas.getContext('2d');
@@ -42,14 +36,20 @@ onValue(resultRef, (snapshot) => {
   new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+      labels: ['Stayed', 'Switched'],
       datasets: [{
-        label: 'Users',
-        data: [50, 60, 70, 180]
-      }, {
-        label: 'Revenue',
-        data: [100, 200, 300, 400]
-      }]
+        label: 'Stayed vs Switched',
+        data: [stayed, switched],
+        backgroundColor: [
+          '#4e73df',
+          '#1cc88a'
+        ],
+        hoverBackgroundColor: [
+          '#2e59d9',
+          '#17a673'
+        ],
+        hoverBorderColor: 'rgba(234, 236, 244, 1)',
+      }],
     }
   });
 }, (error) => {
