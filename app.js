@@ -1,6 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
 
 let playerChoice;
 let carBehind;
@@ -9,10 +9,11 @@ let openedDoor;
 let gameStarted = false;
 let didSwitch;
 
-// Firebase-Konfiguration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCNrsG76-QobHmbMMGkIc6HMcyx4YPGe3A",
   authDomain: "ziegenproblem.firebaseapp.com",
+  databaseURL: "https://ziegenproblem-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "ziegenproblem",
   storageBucket: "ziegenproblem.firebasestorage.app",
   messagingSenderId: "646164011377",
@@ -22,8 +23,8 @@ const firebaseConfig = {
 
 // Firebase initialisieren
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
+// Get a reference to the Realtime Database
+const database = getDatabase(app);
 
 // Spiel starten
 async function ziegenProblem(playerChoiceInitial) {
@@ -120,20 +121,15 @@ function endGame() {
   saveResult(playerChoice, carBehind, didSwitch);
 }
 
-// Frage zur Wahrscheinlichkeit anzeigen
-function askProbability(didSwitch) {
-  const probabilitySection = document.getElementById('probabilitySection');
-}
-
 // Ergebnis in Firestore speichern
 function saveResult(playerChoice, car, didSwitch) {
-  const resultsCollection = collection(db, 'ziegen_problem');
+  const resultRef = ref(database, 'ziegen_problem');
 
-  addDoc(resultsCollection, {
+  set(resultRef, {
     playerChoice,
-    carBehind: car,
+    carBehind,
     didSwitch,
-    timestamp: serverTimestamp()
+    timestamp: Date.now()
   })
     .then(() => {
       console.log("Result saved successfully!");
