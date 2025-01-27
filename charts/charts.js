@@ -175,7 +175,7 @@ onValue(resultRef, (snapshot) => {
 /////////////
 
 // Initialize the chart variable
-let stayedProbabilityChart;
+let ProbabilityStayChart;
 // Get the canvas element
 const canvas4 = document.getElementById('myChart4');
 const ctx4 = canvas3.getContext('2d');
@@ -186,25 +186,37 @@ onValue(resultRef, (snapshot) => {
     console.log(data);
 
     // Count the number of stayed and switched
-    const won = Object.values(data)
-        .filter(item => item.didStay)
-        .filter(item => item.carBehind === item.playerChoice).length;
-    const lost = Object.values(data)
-        .filter(item => item.didStay)
-        .filter(item => item.carBehind !== item.playerChoice).length;
+    const probability = Object.values(data)
+        .filter(item => item.probabilitySwitch).length;
+    
 
-    // Chart configuration
+    // Dynamische Labels und Daten aus der Datenbank extrahieren
+    const labels = Object.keys(data); // Labels sind die Schlüssel der Datenbankeinträge
+    const chartDataValues = Object.values(data).map(item => item.probabilitySwitch); // Die zugehörigen Werte
+    
+    // Prüfen, ob alle Werte vorhanden sind
+    console.log("Labels:", labels);
+    console.log("Daten:", chartDataValues);
+
+    // Chart-Konfiguration
     const chartData = {
-        labels: ['Auto', 'Ziege'],
+        labels: labels, // Dynamische Labels
         datasets: [{
-            data: [won, lost],
+            label: 'Wahrscheinlichkeiten',
+            data: chartDataValues, // Dynamische Werte
             backgroundColor: [
                 '#4e73df',
-                '#1cc88a'
+                '#1cc88a',
+                '#36b9cc',
+                '#f6c23e',
+                '#e74a3b'
             ],
             hoverBackgroundColor: [
                 '#2e59d9',
-                '#17a673'
+                '#17a673',
+                '#2c9faf',
+                '#d4a017',
+                '#be2617'
             ],
             hoverBorderColor: 'rgba(234, 236, 244, 1)',
         }]
