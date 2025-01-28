@@ -79,7 +79,7 @@ let myChart2;
 onValue(resultRef, (snapshot) => {
     const data = snapshot.val();
     console.log(data);
-
+    
     // Count the number of stayed and switched
     const won = Object.values(data)
         .filter(item => item.didSwitch)
