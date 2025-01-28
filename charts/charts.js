@@ -39,7 +39,6 @@ onValue(resultRef, (snapshot) => {
     const chartData = {
         labels: ['Bleiben', 'Wechseln'],
         datasets: [{
-            label: ['geblieben', 'gewechselt'],
             data: [stayed, switched]
         }]
     };
