@@ -239,3 +239,111 @@ onValue(resultRef, (snapshot) => {
 }, (error) => {
     console.error(error);
 });
+
+// Get the canvas element
+const canvas6 = document.getElementById('myChart6');
+const ctx6 = canvas4.getContext('2d');
+let myChart6;
+// Retrieve data from the database
+onValue(resultRef, (snapshot) => {
+    const data = snapshot.val();
+
+    // Group data by probabilityStay
+    const groupedData = {};
+    Object.values(data).forEach(item => {
+        const probStay = item.probabilityStay;
+        if (groupedData[probStay]) {
+            groupedData[probStay]++;
+        } else {
+            groupedData[probStay] = 1;
+        }
+    });
+
+    // Dynamische Labels und Daten aus der Datenbank extrahieren
+    const labels = Object.keys(groupedData).map(label => `${label}%`);
+    const chartDataValues = Object.values(groupedData);
+
+    // Chart-Konfiguration
+    const chartData = {
+        labels: labels, // Dynamische Labels
+        datasets: [{
+            label: 'Wahrscheinlichkeiten',
+            data: chartDataValues, // Dynamische Werte,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Start y-axis at zero
+                    }
+                }
+            }
+        }]
+    };
+    // If the chart already exists, update it
+    if (myChart6) {
+        myChart6.data = chartData;
+        myChart6.update();
+    } else {
+        // Create the chart if it doesn't exist
+        myChart6 = new Chart(ctx6, {
+            type: 'bar',
+            data: chartData
+        });
+    }
+}, (error) => {
+    console.error(error);
+});
+
+/////////////
+
+// Get the canvas element
+const canvas7 = document.getElementById('myChart7');
+const ctx7 = canvas5.getContext('2d');
+let myChart7;
+// Retrieve data from the database
+onValue(resultRef, (snapshot) => {
+    const data = snapshot.val();
+
+    // Group data by probabilitySwitch
+    const groupedData = {};
+    Object.values(data).forEach(item => {
+        const probSwitch = item.probabilitySwitch;
+        if (groupedData[probSwitch]) {
+            groupedData[probSwitch]++;
+        } else {
+            groupedData[probSwitch] = 1;
+        }
+    });
+
+    // Dynamische Labels und Daten aus der Datenbank extrahieren
+    const labels = Object.keys(groupedData).map(label => `${label}%`);
+    const chartDataValues = Object.values(groupedData);
+
+    // Chart-Konfiguration
+    const chartData = {
+        labels: labels, // Dynamische Labels
+        datasets: [{
+            label: 'Genannt von',
+            data: chartDataValues, // Dynamische Werte
+        }]
+    };
+    // If the chart already exists, update it
+    if (myChart7) {
+        myChart7.data = chartData;
+        myChart7.update();
+    } else {
+        // Create the chart if it doesn't exist
+        myChart7 = new Chart(ctx7, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Start y-axis at zero
+                    }
+                }
+            }
+        });
+    }
+}, (error) => {
+    console.error(error);
+});
