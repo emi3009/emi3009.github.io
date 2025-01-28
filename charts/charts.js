@@ -39,7 +39,7 @@ onValue(resultRef, (snapshot) => {
     const chartData = {
         labels: ['Bleiben', 'Wechseln'],
         datasets: [{
-            label: 'gewechselt vs geblieben',
+            label: ['geblieben', 'gewechselt'],
             data: [stayed, switched]
         }]
     };
@@ -79,7 +79,7 @@ onValue(resultRef, (snapshot) => {
 
     // Chart configuration
     const chartData = {
-        labels: ['Auto', 'Ziege'],
+        labels: ['Gewonnen', 'Verloren'],
         datasets: [{
             data: [won, lost]
         }]
@@ -121,7 +121,7 @@ onValue(resultRef, (snapshot) => {
 
     // Chart configuration
     const chartData = {
-        labels: ['Auto', 'Ziege'],
+        labels: ['Gewonnen', 'Verloren'],
         datasets: [{
             data: [won, lost]
         }]
@@ -242,7 +242,7 @@ onValue(resultRef, (snapshot) => {
 
 // Get the canvas element
 const canvas6 = document.getElementById('myChart6');
-const ctx6 = canvas4.getContext('2d');
+const ctx6 = canvas6.getContext('2d');
 let myChart6;
 // Retrieve data from the database
 onValue(resultRef, (snapshot) => {
@@ -297,7 +297,7 @@ onValue(resultRef, (snapshot) => {
 
 // Get the canvas element
 const canvas7 = document.getElementById('myChart7');
-const ctx7 = canvas5.getContext('2d');
+const ctx7 = canvas7.getContext('2d');
 let myChart7;
 // Retrieve data from the database
 onValue(resultRef, (snapshot) => {
