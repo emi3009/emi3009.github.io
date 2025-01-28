@@ -179,17 +179,20 @@ let myChart4;
 onValue(resultRef, (snapshot) => {
     const data = snapshot.val();
 
-    // Count the number of stayed and switched
-    const probability = Object.values(data)
-        .filter(item => item.probabilitySwitch).length;
+    // Group data by probabilityStay
+    const groupedData = {};
+    Object.values(data).forEach(item => {
+        const probStay = item.probabilityStay;
+        if (groupedData[probStay]) {
+            groupedData[probStay]++;
+        } else {
+            groupedData[probStay] = 1;
+        }
+    });
 
     // Dynamische Labels und Daten aus der Datenbank extrahieren
-    const labels = Object.keys(data); // Labels sind die Schlüssel der Datenbankeinträge
-    const chartDataValues = Object.values(data).map(item => item.probabilitySwitch); // Die zugehörigen Werte
-
-    // Prüfen, ob alle Werte vorhanden sind
-    console.log("Labels:", labels);
-    console.log("Daten:", chartDataValues);
+    const labels = Object.keys(groupedData);
+    const chartDataValues = Object.values(groupedData);
 
     // Chart-Konfiguration
     const chartData = {
