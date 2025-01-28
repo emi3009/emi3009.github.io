@@ -40,16 +40,7 @@ onValue(resultRef, (snapshot) => {
         labels: ['Bleiben', 'Wechseln'],
         datasets: [{
             label: 'gewechselt vs geblieben',
-            data: [stayed, switched],
-            backgroundColor: [
-                '#4e73df',
-                '#1cc88a'
-            ],
-            hoverBackgroundColor: [
-                '#2e59d9',
-                '#17a673'
-            ],
-            hoverBorderColor: 'rgba(234, 236, 244, 1)',
+            data: [stayed, switched]
         }]
     };
     console.log(chartData);
@@ -90,16 +81,7 @@ onValue(resultRef, (snapshot) => {
     const chartData = {
         labels: ['Auto', 'Ziege'],
         datasets: [{
-            data: [won, lost],
-            backgroundColor: [
-                '#4e73df',
-                '#1cc88a'
-            ],
-            hoverBackgroundColor: [
-                '#2e59d9',
-                '#17a673'
-            ],
-            hoverBorderColor: 'rgba(234, 236, 244, 1)',
+            data: [won, lost]
         }]
     };
     console.log(chartData);
@@ -141,16 +123,7 @@ onValue(resultRef, (snapshot) => {
     const chartData = {
         labels: ['Auto', 'Ziege'],
         datasets: [{
-            data: [won, lost],
-            backgroundColor: [
-                '#4e73df',
-                '#1cc88a'
-            ],
-            hoverBackgroundColor: [
-                '#2e59d9',
-                '#17a673'
-            ],
-            hoverBorderColor: 'rgba(234, 236, 244, 1)',
+            data: [won, lost]
         }]
     };
     console.log(chartData);
@@ -200,21 +173,6 @@ onValue(resultRef, (snapshot) => {
         datasets: [{
             label: 'Wahrscheinlichkeiten',
             data: chartDataValues, // Dynamische Werte
-            backgroundColor: [
-                '#4e73df',
-                '#1cc88a',
-                '#36b9cc',
-                '#f6c23e',
-                '#e74a3b'
-            ],
-            hoverBackgroundColor: [
-                '#2e59d9',
-                '#17a673',
-                '#2c9faf',
-                '#d4a017',
-                '#be2617'
-            ],
-            hoverBorderColor: 'rgba(234, 236, 244, 1)',
         }]
     };
     console.log(chartData);
