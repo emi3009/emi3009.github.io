@@ -170,6 +170,7 @@ onValue(resultRef, (snapshot) => {
     const chartData = {
         labels: labels, // Dynamische Labels
         datasets: [{
+            label: 'Anzahl der Schätzungen',
             data: chartDataValues, // Dynamische Werte,
             options: {
                 scales: {
@@ -230,6 +231,7 @@ onValue(resultRef, (snapshot) => {
     const chartData = {
         labels: labels, // Dynamische Labels
         datasets: [{
+            label: 'Anzahl der Schätzungen',
             data: chartDataValues, // Dynamische Werte
         }]
     };
