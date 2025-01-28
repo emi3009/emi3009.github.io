@@ -195,7 +195,7 @@ onValue(resultRef, (snapshot) => {
 
 // Get the canvas element
 const canvas5 = document.getElementById('myChart5');
-const ctx5 = canvas4.getContext('2d');
+const ctx5 = canvas5.getContext('2d');
 let myChart5;
 // Retrieve data from the database
 onValue(resultRef, (snapshot) => {
