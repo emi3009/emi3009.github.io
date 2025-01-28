@@ -52,6 +52,7 @@ onValue(resultRef, (snapshot) => {
             hoverBorderColor: 'rgba(234, 236, 244, 1)',
         }]
     };
+    console.log(chartData);
     // If the chart already exists, update it
     if (myChart) {
         myChart.data = chartData;
@@ -69,8 +70,6 @@ onValue(resultRef, (snapshot) => {
 
 /////////////
 
-// Initialize the chart variable
-let switchedProbabilityChart;
 // Get the canvas element
 const canvas2 = document.getElementById('myChart2');
 const ctx2 = canvas2.getContext('2d');
@@ -78,7 +77,6 @@ let myChart2;
 // Retrieve data from the database
 onValue(resultRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
     
     // Count the number of stayed and switched
     const won = Object.values(data)
@@ -104,6 +102,7 @@ onValue(resultRef, (snapshot) => {
             hoverBorderColor: 'rgba(234, 236, 244, 1)',
         }]
     };
+    console.log(chartData);
     // If the chart already exists, update it
     if (myChart2) {
         myChart2.data = chartData;
@@ -122,8 +121,6 @@ onValue(resultRef, (snapshot) => {
 
 /////////////
 
-// Initialize the chart variable
-let stayedProbabilityChart;
 // Get the canvas element
 const canvas3 = document.getElementById('myChart3');
 const ctx3 = canvas3.getContext('2d');
@@ -131,14 +128,13 @@ let myChart3;
 // Retrieve data from the database
 onValue(resultRef, (snapshot) => {
     const data = snapshot.val();
-    console.log(data);
 
     // Count the number of stayed and switched
     const won = Object.values(data)
-        .filter(item => item.didStay)
+        .filter(item => !item.didSwitch)
         .filter(item => item.carBehind === item.playerChoice).length;
     const lost = Object.values(data)
-        .filter(item => item.didStay)
+        .filter(item => !item.didSwitch)
         .filter(item => item.carBehind !== item.playerChoice).length;
 
     // Chart configuration
@@ -157,6 +153,7 @@ onValue(resultRef, (snapshot) => {
             hoverBorderColor: 'rgba(234, 236, 244, 1)',
         }]
     };
+    console.log(chartData);
     // If the chart already exists, update it
     if (myChart3) {
         myChart3.data = chartData;
@@ -174,5 +171,62 @@ onValue(resultRef, (snapshot) => {
 
 /////////////
 
+// Get the canvas element
+const canvas4 = document.getElementById('myChart4');
+const ctx4 = canvas4.getContext('2d');
+let myChart4;
+// Retrieve data from the database
+onValue(resultRef, (snapshot) => {
+    const data = snapshot.val();
 
+    // Count the number of stayed and switched
+    const probability = Object.values(data)
+        .filter(item => item.probabilitySwitch).length;
+
+    // Dynamische Labels und Daten aus der Datenbank extrahieren
+    const labels = Object.keys(data); // Labels sind die Schlüssel der Datenbankeinträge
+    const chartDataValues = Object.values(data).map(item => item.probabilitySwitch); // Die zugehörigen Werte
+
+    // Prüfen, ob alle Werte vorhanden sind
+    console.log("Labels:", labels);
+    console.log("Daten:", chartDataValues);
+
+    // Chart-Konfiguration
+    const chartData = {
+        labels: labels, // Dynamische Labels
+        datasets: [{
+            label: 'Wahrscheinlichkeiten',
+            data: chartDataValues, // Dynamische Werte
+            backgroundColor: [
+                '#4e73df',
+                '#1cc88a',
+                '#36b9cc',
+                '#f6c23e',
+                '#e74a3b'
+            ],
+            hoverBackgroundColor: [
+                '#2e59d9',
+                '#17a673',
+                '#2c9faf',
+                '#d4a017',
+                '#be2617'
+            ],
+            hoverBorderColor: 'rgba(234, 236, 244, 1)',
+        }]
+    };
+    console.log(chartData);
+    // If the chart already exists, update it
+    if (myChart4) {
+        myChart4.data = chartData;
+        myChart4.update();
+    } else {
+        // Create the chart if it doesn't exist
+        myChart4 = new Chart(ctx4, {
+            type: 'pie',
+            data: chartData
+        });
+    }
+}, (error) => {
+    console.error(error);
+});
 
