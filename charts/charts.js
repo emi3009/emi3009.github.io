@@ -142,103 +142,6 @@ onValue(resultRef, (snapshot) => {
     console.error(error);
 });
 
-/////////////
-
-// Get the canvas element
-const canvas4 = document.getElementById('myChart4');
-const ctx4 = canvas4.getContext('2d');
-let myChart4;
-// Retrieve data from the database
-onValue(resultRef, (snapshot) => {
-    const data = snapshot.val();
-
-    // Group data by probabilityStay
-    const groupedData = {};
-    Object.values(data).forEach(item => {
-        const probStay = item.probabilityStay;
-        if (groupedData[probStay]) {
-            groupedData[probStay]++;
-        } else {
-            groupedData[probStay] = 1;
-        }
-    });
-
-    // Dynamische Labels und Daten aus der Datenbank extrahieren
-    const labels = Object.keys(groupedData).map(label => `${label}%`);
-    const chartDataValues = Object.values(groupedData);
-
-    // Chart-Konfiguration
-    const chartData = {
-        labels: labels, // Dynamische Labels
-        datasets: [{
-            label: 'Wahrscheinlichkeiten',
-            data: chartDataValues, // Dynamische Werte
-        }]
-    };
-    console.log(chartData);
-    // If the chart already exists, update it
-    if (myChart4) {
-        myChart4.data = chartData;
-        myChart4.update();
-    } else {
-        // Create the chart if it doesn't exist
-        myChart4 = new Chart(ctx4, {
-            type: 'pie',
-            data: chartData
-        });
-    }
-}, (error) => {
-    console.error(error);
-});
-
-/////////////
-
-// Get the canvas element
-const canvas5 = document.getElementById('myChart5');
-const ctx5 = canvas5.getContext('2d');
-let myChart5;
-// Retrieve data from the database
-onValue(resultRef, (snapshot) => {
-    const data = snapshot.val();
-
-    // Group data by probabilitySwitch
-    const groupedData = {};
-    Object.values(data).forEach(item => {
-        const probSwitch = item.probabilitySwitch;
-        if (groupedData[probSwitch]) {
-            groupedData[probSwitch]++;
-        } else {
-            groupedData[probSwitch] = 1;
-        }
-    });
-
-    // Dynamische Labels und Daten aus der Datenbank extrahieren
-    const labels = Object.keys(groupedData).map(label => `${label}%`);
-    const chartDataValues = Object.values(groupedData);
-
-    // Chart-Konfiguration
-    const chartData = {
-        labels: labels, // Dynamische Labels
-        datasets: [{
-            label: 'Genannt von',
-            data: chartDataValues, // Dynamische Werte
-        }]
-    };
-    console.log(chartData);
-    // If the chart already exists, update it
-    if (myChart5) {
-        myChart5.data = chartData;
-        myChart5.update();
-    } else {
-        // Create the chart if it doesn't exist
-        myChart5 = new Chart(ctx5, {
-            type: 'pie',
-            data: chartData
-        });
-    }
-}, (error) => {
-    console.error(error);
-});
 
 // Get the canvas element
 const canvas6 = document.getElementById('myChart6');
@@ -267,12 +170,17 @@ onValue(resultRef, (snapshot) => {
     const chartData = {
         labels: labels, // Dynamische Labels
         datasets: [{
-            label: 'Wahrscheinlichkeiten',
             data: chartDataValues, // Dynamische Werte,
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true // Start y-axis at zero
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1, // Set step size to 1 for whole numbers
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : ''; // Only show whole numbers
+                            }
+                        }
                     }
                 }
             }
@@ -322,7 +230,6 @@ onValue(resultRef, (snapshot) => {
     const chartData = {
         labels: labels, // Dynamische Labels
         datasets: [{
-            label: 'Genannt von',
             data: chartDataValues, // Dynamische Werte
         }]
     };
@@ -338,7 +245,13 @@ onValue(resultRef, (snapshot) => {
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true // Start y-axis at zero
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1, // Set step size to 1 for whole numbers
+                            callback: function(value) {
+                                return Number.isInteger(value) ? value : ''; // Only show whole numbers
+                            }
+                        }
                     }
                 }
             }
