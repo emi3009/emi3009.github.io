@@ -224,7 +224,7 @@ onValue(resultRef, (snapshot) => {
     // If the chart already exists, update it
     if (myChart4) {
         myChart4.data = chartData;
-        myChart3.update();
+        myChart4.update();
     } else {
         // Create the chart if it doesn't exist
         myChart4 = new Chart(ctx4, {
