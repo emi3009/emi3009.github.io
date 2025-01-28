@@ -5,11 +5,32 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-<div style="display: flex; height: 300px">
-<canvas id="myChart1"></canvas>
-<canvas id="myChart2"></canvas>
-<canvas id="myChart3"></canvas>
-<canvas id="myChart4"></canvas>
+<h1>Auswertung</h1>
+<div style="display: flex; flex-direction: column">
+    <div style="display: flex; height: 300px">
+        <h2>Wieviele sind gewechselt und geblieben?</h2>
+        <canvas id="myChart1"></canvas>
+    </div>
+    <div style="display: flex; height: 400px">
+        <div style="display: flex; flex-direction: column">
+            <h2>Gewinnquote der Wechsler</h2>
+            <canvas id="myChart2"></canvas>
+        </div>
+        <div style="display: flex; flex-direction: column">
+            <h2>Gewinnquote der Gebliebenen</h2>
+            <canvas id="myChart3"></canvas>
+        </div>
+    </div>
+    <div style="display: flex; height: 400px">
+        <div style="display: flex; flex-direction: column">
+            <h2>Geschätze Gewinnchance beim Wechseln</h2>
+            <canvas id="myChart5"></canvas>
+        </div>
+        <div style="display: flex; flex-direction: column">
+            <h2>Geschätze Gewinnchance beim Bleiben</h2>
+            <canvas id="myChart4"></canvas>
+        </div>
+    </div>
 </div>
 <script type="module" src="charts.js"></script>
 </body>

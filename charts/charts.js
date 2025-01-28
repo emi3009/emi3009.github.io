@@ -164,7 +164,7 @@ onValue(resultRef, (snapshot) => {
     });
 
     // Dynamische Labels und Daten aus der Datenbank extrahieren
-    const labels = Object.keys(groupedData);
+    const labels = Object.keys(groupedData).map(label => `${label}%`);
     const chartDataValues = Object.values(groupedData);
 
     // Chart-Konfiguration
@@ -191,3 +191,51 @@ onValue(resultRef, (snapshot) => {
     console.error(error);
 });
 
+/////////////
+
+// Get the canvas element
+const canvas5 = document.getElementById('myChart5');
+const ctx5 = canvas4.getContext('2d');
+let myChart5;
+// Retrieve data from the database
+onValue(resultRef, (snapshot) => {
+    const data = snapshot.val();
+
+    // Group data by probabilitySwitch
+    const groupedData = {};
+    Object.values(data).forEach(item => {
+        const probSwitch = item.probabilitySwitch;
+        if (groupedData[probSwitch]) {
+            groupedData[probSwitch]++;
+        } else {
+            groupedData[probSwitch] = 1;
+        }
+    });
+
+    // Dynamische Labels und Daten aus der Datenbank extrahieren
+    const labels = Object.keys(groupedData).map(label => `${label}%`);
+    const chartDataValues = Object.values(groupedData);
+
+    // Chart-Konfiguration
+    const chartData = {
+        labels: labels, // Dynamische Labels
+        datasets: [{
+            label: 'Genannt von',
+            data: chartDataValues, // Dynamische Werte
+        }]
+    };
+    console.log(chartData);
+    // If the chart already exists, update it
+    if (myChart5) {
+        myChart5.data = chartData;
+        myChart5.update();
+    } else {
+        // Create the chart if it doesn't exist
+        myChart5 = new Chart(ctx5, {
+            type: 'pie',
+            data: chartData
+        });
+    }
+}, (error) => {
+    console.error(error);
+});
